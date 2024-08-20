@@ -3,7 +3,7 @@ from bpy.props import StringProperty, IntProperty, PointerProperty, EnumProperty
 from bpy.types import Operator, Panel
 
 bl_info = {
-    "name": "Batch Render Tool",
+    "name": "Adaptive Sequential Image Export Tool Addon",
     "blender": (3, 0, 0),
     "category": "3D View",
 }
@@ -81,9 +81,9 @@ def main(collection_name, output_folder, pixel_height, light_collection_name, ca
             output_path = f"{output_folder}/{obj.name}.png"
             render_object(obj, output_path, pixel_height, light_collection_name, camera, engine)
 
-class BatchRenderSettings(bpy.types.PropertyGroup):
+class AdaptiveRenderSettings(bpy.types.PropertyGroup):
     collection_name: StringProperty(
-        name="Collection",
+        name="Render Collection",
         description="Collection of objects to render",
         default=""
     )
@@ -91,7 +91,7 @@ class BatchRenderSettings(bpy.types.PropertyGroup):
     output_folder: StringProperty(
         name="Output Folder",
         description="Folder to save rendered images",
-        default=r"C:\Users\[user]\Desktop\\",  # Using raw string for Windows paths
+        default=r"C:\Users\[user]\Desktop\\",  # Use a raw string for Windows paths
         subtype='DIR_PATH'
     )
     
@@ -146,13 +146,13 @@ class RENDER_PT_batch_render_panel(Panel):
 
 def register():
     bpy.utils.register_class(RENDER_OT_batch_render)
-    bpy.utils.register_class(BatchRenderSettings)
+    bpy.utils.register_class(AdaptiveRenderSettings)
     bpy.utils.register_class(RENDER_PT_batch_render_panel)
-    bpy.types.Scene.batch_render_settings = bpy.props.PointerProperty(type=BatchRenderSettings)
+    bpy.types.Scene.batch_render_settings = bpy.props.PointerProperty(type=AdaptiveRenderSettings)
 
 def unregister():
     bpy.utils.unregister_class(RENDER_OT_batch_render)
-    bpy.utils.unregister_class(BatchRenderSettings)
+    bpy.utils.unregister_class(AdaptiveRenderSettings)
     bpy.utils.unregister_class(RENDER_PT_batch_render_panel)
     del bpy.types.Scene.batch_render_settings
 
