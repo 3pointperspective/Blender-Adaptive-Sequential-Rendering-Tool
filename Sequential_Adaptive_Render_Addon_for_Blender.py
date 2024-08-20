@@ -3,7 +3,7 @@ from bpy.props import StringProperty, IntProperty, PointerProperty, EnumProperty
 from bpy.types import Operator, Panel
 
 bl_info = {
-    "name": "Adaptive Sequential Image Export Tool Addon",
+    "name": "Adaptive Sequential Image Exporter",
     "blender": (3, 0, 0),
     "category": "3D View",
 }
@@ -83,7 +83,7 @@ def main(collection_name, output_folder, pixel_height, light_collection_name, ca
 
 class AdaptiveRenderSettings(bpy.types.PropertyGroup):
     collection_name: StringProperty(
-        name="Render Collection",
+        name="Collection",
         description="Collection of objects to render",
         default=""
     )
@@ -91,7 +91,7 @@ class AdaptiveRenderSettings(bpy.types.PropertyGroup):
     output_folder: StringProperty(
         name="Output Folder",
         description="Folder to save rendered images",
-        default=r"C:\Users\[user]\Desktop\\",  # Use a raw string for Windows paths
+        default=r"C:\Users\[user]\Desktop\\",  # Using raw string for Windows paths
         subtype='DIR_PATH'
     )
     
@@ -125,7 +125,7 @@ class AdaptiveRenderSettings(bpy.types.PropertyGroup):
     )
 
 class RENDER_PT_batch_render_panel(Panel):
-    bl_label = "Batch Render Tool"
+    bl_label = "Adaptive Render Tool"
     bl_idname = "RENDER_PT_batch_render_panel"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
